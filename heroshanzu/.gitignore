@@ -8,3 +8,4 @@ local_settings.py
 /static/
 *.json
 serviceAccountKey.json
+serviceAccountKey.json
