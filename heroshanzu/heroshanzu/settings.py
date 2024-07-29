@@ -1,6 +1,6 @@
 
 import os
-
+from decouple import config, Csv
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -11,12 +11,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-qy1*0#e&0o(9vk8*#*n2$@5(o0*5x4#+#39xh-h%p6wuy2$b+u'
+SECRET_KEY=config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG=config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -44,12 +44,15 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'heroshanzu.urls'
 
+FIREBASE_CREDENTIALS = config('FIREBASE_CREDENTIALS')
+FIREBASE_STORAGE_BUCKET = config('FIREBASE_STORAGE_BUCKET')
+
 import firebase_admin
 from firebase_admin import credentials
 
-cred = credentials.Certificate('C:/Users/rotic/Desktop/project/heroshanzu3/heroshanzu/serviceAccountKey.json')
+cred = credentials.Certificate(FIREBASE_CREDENTIALS)
 firebase_admin.initialize_app(cred, {
-    'storageBucket': 'heroshanzu-f4980.appspot.com'
+    'storageBucket': FIREBASE_STORAGE_BUCKET
 })
 
 
