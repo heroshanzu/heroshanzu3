@@ -6,5 +6,5 @@
 __pycache__/
 local_settings.py
 /static/
-/serviceAccountKey.json
+heroshanzu/serviceAccountKey.json
 serviceAccountKey.json
